@@ -1,0 +1,440 @@
+{
+	"textures": [
+		{
+			"image": "tileset.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 216,
+				"h": 403
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "castle.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 70,
+						"h": 70
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 70,
+						"h": 70
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 70,
+						"h": 70
+					}
+				},
+				{
+					"filename": "castleCenter.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 70,
+						"h": 70
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 70,
+						"h": 70
+					},
+					"frame": {
+						"x": 73,
+						"y": 1,
+						"w": 70,
+						"h": 70
+					}
+				},
+				{
+					"filename": "castleCenter_rounded.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 70,
+						"h": 70
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 70,
+						"h": 70
+					},
+					"frame": {
+						"x": 145,
+						"y": 1,
+						"w": 70,
+						"h": 70
+					}
+				},
+				{
+					"filename": "castleCliffLeft.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 70,
+						"h": 70
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 70,
+						"h": 70
+					},
+					"frame": {
+						"x": 1,
+						"y": 73,
+						"w": 70,
+						"h": 70
+					}
+				},
+				{
+					"filename": "castleCliffLeftAlt.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 70,
+						"h": 70
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 70,
+						"h": 70
+					},
+					"frame": {
+						"x": 73,
+						"y": 73,
+						"w": 70,
+						"h": 70
+					}
+				},
+				{
+					"filename": "castleCliffRight.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 70,
+						"h": 70
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 70,
+						"h": 70
+					},
+					"frame": {
+						"x": 145,
+						"y": 73,
+						"w": 70,
+						"h": 70
+					}
+				},
+				{
+					"filename": "castleCliffRightAlt.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 70,
+						"h": 70
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 70,
+						"h": 70
+					},
+					"frame": {
+						"x": 1,
+						"y": 145,
+						"w": 70,
+						"h": 70
+					}
+				},
+				{
+					"filename": "castleHillLeft.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 70,
+						"h": 70
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 70,
+						"h": 70
+					},
+					"frame": {
+						"x": 73,
+						"y": 145,
+						"w": 70,
+						"h": 70
+					}
+				},
+				{
+					"filename": "castleHillLeft2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 70,
+						"h": 70
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 70,
+						"h": 70
+					},
+					"frame": {
+						"x": 145,
+						"y": 145,
+						"w": 70,
+						"h": 70
+					}
+				},
+				{
+					"filename": "castleHillRight.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 70,
+						"h": 70
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 70,
+						"h": 70
+					},
+					"frame": {
+						"x": 1,
+						"y": 217,
+						"w": 70,
+						"h": 70
+					}
+				},
+				{
+					"filename": "castleHillRight2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 70,
+						"h": 70
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 70,
+						"h": 70
+					},
+					"frame": {
+						"x": 1,
+						"y": 289,
+						"w": 70,
+						"h": 70
+					}
+				},
+				{
+					"filename": "castleHalf.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 70,
+						"h": 70
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 70,
+						"h": 41
+					},
+					"frame": {
+						"x": 1,
+						"y": 361,
+						"w": 70,
+						"h": 41
+					}
+				},
+				{
+					"filename": "castleLeft.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 70,
+						"h": 70
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 70,
+						"h": 70
+					},
+					"frame": {
+						"x": 73,
+						"y": 217,
+						"w": 70,
+						"h": 70
+					}
+				},
+				{
+					"filename": "castleMid.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 70,
+						"h": 70
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 70,
+						"h": 70
+					},
+					"frame": {
+						"x": 145,
+						"y": 217,
+						"w": 70,
+						"h": 70
+					}
+				},
+				{
+					"filename": "castleRight.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 70,
+						"h": 70
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 70,
+						"h": 70
+					},
+					"frame": {
+						"x": 73,
+						"y": 289,
+						"w": 70,
+						"h": 70
+					}
+				},
+				{
+					"filename": "castleHalfLeft.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 70,
+						"h": 70
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 70,
+						"h": 41
+					},
+					"frame": {
+						"x": 73,
+						"y": 361,
+						"w": 70,
+						"h": 41
+					}
+				},
+				{
+					"filename": "castleHalfMid.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 70,
+						"h": 70
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 70,
+						"h": 41
+					},
+					"frame": {
+						"x": 145,
+						"y": 289,
+						"w": 70,
+						"h": 41
+					}
+				},
+				{
+					"filename": "castleHalfRight.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 70,
+						"h": 70
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 70,
+						"h": 41
+					},
+					"frame": {
+						"x": 145,
+						"y": 332,
+						"w": 70,
+						"h": 41
+					}
+				},
+				{
+					"filename": "castleLedgeLeft.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 5,
+						"h": 22
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 5,
+						"h": 22
+					},
+					"frame": {
+						"x": 145,
+						"y": 375,
+						"w": 5,
+						"h": 22
+					}
+				},
+				{
+					"filename": "castleLedgeRight.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 5,
+						"h": 22
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 5,
+						"h": 22
+					},
+					"frame": {
+						"x": 152,
+						"y": 375,
+						"w": 5,
+						"h": 22
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:0fb4a40ecc858146617745ddcfec3779:507a213e225d0523e7c9b55f0720c4d0:ace0e5e82375743ccde85e973fd84fb5$"
+	}
+}
