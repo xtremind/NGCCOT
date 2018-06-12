@@ -24,7 +24,7 @@
     "legacy:prod": "NODE_ENV=production node app.js",
     "dev": "webpack --mode=development",
     "prod": "NODE_ENV=production node app.js",
-    "start": "node app.js"
+    "start": "npm run dev && npm run legacy:dev"
   },
   "author": "developer"
 }

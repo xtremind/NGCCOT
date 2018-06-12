@@ -2,6 +2,8 @@
 import 'phaser';
 
 // Scenes
+import BootScene from './scenes/BootScene';
+import PreloadScene from './scenes/PreloadScene';
 import TitleScene from './scenes/TitleScene';
 
 // Declare configuration
@@ -16,6 +18,8 @@ const config = {
     }
   },
   scene: [
+    BootScene,
+    PreloadScene,
     TitleScene
   ]
 };
