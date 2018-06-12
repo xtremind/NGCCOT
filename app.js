@@ -5,7 +5,6 @@ var express = require("express"),
 
 var env = process.env.NODE_ENV || "development";
 
-
 var config = winston.config;
 logger = new (winston.Logger)({
   level: env == "development" ? 'debug' : 'info',
@@ -31,8 +30,8 @@ logger = new (winston.Logger)({
 //logger.debug("Mode " + process.env.NODE_ENV );
 
 // Serve up index.html.
-app.use('/js', express.static(__dirname + '/node_modules'));
-app.use(express.static(__dirname + '/src'));
+//app.use('/js', express.static(__dirname + '/node_modules'));
+app.use(express.static(__dirname + '/dist'));
 
 var server_port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080;
 var server_ip_address = process.env.IP || process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
@@ -44,5 +43,5 @@ http.listen(server_port, null, function () {
 
 //redirect client part
 app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/src/index.html');
+  res.sendFile(__dirname + '/dist/index.html');
 });
