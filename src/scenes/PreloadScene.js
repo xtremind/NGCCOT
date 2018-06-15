@@ -26,10 +26,20 @@ class PreloadScene extends Phaser.Scene {
       this.scene.start('TitleScene');
     });
 
-    this.load.setBaseURL('http://labs.phaser.io');
-    this.load.image('sky', 'assets/skies/space3.png');
-    this.load.image('logo', 'assets/sprites/phaser3-logo.png');
-    this.load.image('red', 'assets/particles/red.png');
+    this.load.image('background', 'public/items/bg_castle.png');
+
+    this.load.image('tiles', 'public/items/tileset.png');
+    this.load.tilemapTiledJSON('map', 'public/items/teest.json');
+
+    this.load.image('player1', 'public/items/player1.png', 'public/items/player1.json');
+    this.load.image('player2', 'public/items/player2.png', 'public/items/player2.json');
+    this.load.image('player3', 'public/items/player3.png', 'public/items/player3.json');
+
+    // demo
+    //this.load.setBaseURL(' http://labs.phaser.io');
+    this.load.image('sky', 'http://labs.phaser.io/assets/skies/space3.png');
+    this.load.image('logo', 'http://labs.phaser.io/assets/sprites/phaser3-logo.png');
+    this.load.image('red', 'http://labs.phaser.io/assets/particles/red.png');
   }
 
 }
