@@ -33,7 +33,7 @@ class PreloadScene extends Phaser.Scene {
     //this.load.spritesheet('tiles', 'assets/tiles.png', {frameWidth: 70, frameHeight: 70});
     this.load.tilemapTiledJSON('map', 'public/items/tileset.json');
 
-    this.load.image('player1', 'public/preview/Player/p1_front.png');
+    this.load.atlas('player1', 'public/items/player1.png', 'public/items/player1.json');
     this.load.atlas('player2', 'public/items/player2.png', 'public/items/player2.json');
     this.load.atlas('player3', 'public/items/player3.png', 'public/items/player3.json');
 

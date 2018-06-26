@@ -21,7 +21,6 @@ class TitleScene extends Phaser.Scene {
     var map = this.make.tilemap({ key: 'map' });
     var tiles = map.addTilesetImage('cybernoid', 'tiles');
     var layer = map.createStaticLayer(0, tiles, 0, 0);
-    //var layer = map.createDynamicLayer('World', tiles, 0, 0);
     layer.setCollisionByExclusion([-1, 0]);
 
     // set the boundaries of our game world
@@ -29,9 +28,29 @@ class TitleScene extends Phaser.Scene {
     this.physics.world.bounds.height = layer.height;
 
     // create the player sprite    
-    this.player1 = this.physics.add.sprite(200, 200, 'player1');
+    this.player1 = this.physics.add.sprite(200, 180, 'player1');
     this.player1.setBounce(0.2); // our player will bounce from items
     this.player1.setCollideWorldBounds(true); // don't go out of the map
+
+
+    this.anims.create({
+      key: 'p1_idle',
+      frames: [{ key: 'player1', frame: 'p1_front.png' }],
+      frameRate: 10,
+    });
+
+    this.anims.create({
+      key: 'p1_jump',
+      frames: [{ key: 'player1', frame: 'p1_jump.png' }],
+      frameRate: 10,
+    });
+
+    this.anims.create({
+      key: 'p1_walk',
+      frames: this.anims.generateFrameNames('player1', { prefix: 'p1_walk', suffix: '.png', start: 1, end: 11, zeroPad: 2 }),
+      frameRate: 10,
+      repeat: -1
+    });
 
     //Load the initial sprite
     this.player2 = this.physics.add.sprite(400, 180, 'player2', 'p2_front.png');
@@ -92,12 +111,20 @@ class TitleScene extends Phaser.Scene {
 
     if (cursors.left.isDown) {
       this.player1.body.setVelocityX(-200); // move left
+      this.player1.anims.play('p1_walk', true); // play walk animation
+      this.player1.flipX = true; // flip the sprite to the left
     } else if (cursors.right.isDown) {
       this.player1.body.setVelocityX(200); // move right
+      this.player1.anims.play('p1_walk', true); // play walk animation
+      this.player1.flipX = false; // flip the sprite to the right
+    }else {
+      this.player1.body.setVelocityX(0);
+      this.player1.anims.play('p1_idle', true);
     }
 
     if (cursors.up.isDown && this.player1.body.onFloor()) {
       this.player1.body.setVelocityY(-500); // jump up
+      this.player1.anims.play('p1_jump', true);
     }
 
     if (this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q).isDown) {
