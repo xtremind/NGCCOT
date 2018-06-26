@@ -29,12 +29,21 @@ class TitleScene extends Phaser.Scene {
     this.physics.world.bounds.height = layer.height;
 
     // create the player sprite    
-    this.player = this.physics.add.sprite(200, 200, 'player1');
-    this.player.setBounce(0.2); // our player will bounce from items
-    this.player.setCollideWorldBounds(true); // don't go out of the map
+    this.player1 = this.physics.add.sprite(200, 200, 'player1');
+    this.player1.setBounce(0.2); // our player will bounce from items
+    this.player1.setCollideWorldBounds(true); // don't go out of the map
+
+  //Load the initial sprite
+  this.player2 = this.physics.add.sprite(400, 180, 'player2', 'p2_front.png');
+  this.player2.setBounce(0.2); // our player will bounce from items
+  this.player2.setCollideWorldBounds(true); // don't go out of the map
+
+
 
     // set collision
-    this.physics.add.collider(layer, this.player);
+    this.physics.add.collider(layer, this.player1);
+    this.physics.add.collider(layer, this.player2);
+    this.physics.add.collider(this.player1, this.player2);
 
 
 
@@ -65,13 +74,23 @@ class TitleScene extends Phaser.Scene {
     var cursors = this.input.keyboard.createCursorKeys();
 
     if (cursors.left.isDown) {
-      this.player.body.setVelocityX(-200); // move left
+      this.player1.body.setVelocityX(-200); // move left
     } else if (cursors.right.isDown) {
-      this.player.body.setVelocityX(200); // move right
+      this.player1.body.setVelocityX(200); // move right
     }
 
-    if ((cursors.space.isDown || cursors.up.isDown) && this.player.body.onFloor()) {
-      this.player.body.setVelocityY(-500); // jump up
+    if ( cursors.up.isDown && this.player1.body.onFloor()) {
+      this.player1.body.setVelocityY(-500); // jump up
+    }
+
+    if (this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q).isDown) {
+      this.player2.body.setVelocityX(-200); // move left
+    } else if (this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D).isDown) {
+      this.player2.body.setVelocityX(200); // move right
+    }
+
+    if ( this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z).isDown && this.player2.body.onFloor()) {
+      this.player2.body.setVelocityY(-500); // jump up
     }
   }
 }
