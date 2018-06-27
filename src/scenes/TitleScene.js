@@ -111,13 +111,21 @@ class TitleScene extends Phaser.Scene {
 
     if (cursors.left.isDown) {
       this.player1.body.setVelocityX(-200); // move left
-      this.player1.anims.play('p1_walk', true); // play walk animation
+      if (this.player1.body.onFloor()) {
+        this.player1.anims.play('p1_walk', true); // play walk animation
+      } else {
+        this.player1.anims.play('p1_jump', true);
+      }
       this.player1.flipX = true; // flip the sprite to the left
     } else if (cursors.right.isDown) {
       this.player1.body.setVelocityX(200); // move right
-      this.player1.anims.play('p1_walk', true); // play walk animation
+      if (this.player1.body.onFloor()) {
+        this.player1.anims.play('p1_walk', true); // play walk animation
+      } else {
+        this.player1.anims.play('p1_jump', true);
+      }
       this.player1.flipX = false; // flip the sprite to the right
-    }else {
+    } else if (this.player1.body.onFloor()) {
       this.player1.body.setVelocityX(0);
       this.player1.anims.play('p1_idle', true);
     }
@@ -129,13 +137,21 @@ class TitleScene extends Phaser.Scene {
 
     if (this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q).isDown) {
       this.player2.body.setVelocityX(-200); // move left
-      this.player2.anims.play('p2_walk', true); // play walk animation
+      if (this.player2.body.onFloor()) {
+        this.player2.anims.play('p2_walk', true); // play walk animation
+      } else {
+        this.player2.anims.play('p2_jump', true);
+      }
       this.player2.flipX = true; // flip the sprite to the left
     } else if (this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D).isDown) {
       this.player2.body.setVelocityX(200); // move right
-      this.player2.anims.play('p2_walk', true); // play walk animation
+      if (this.player2.body.onFloor()) {
+        this.player2.anims.play('p2_walk', true); // play walk animation
+      } else {
+        this.player2.anims.play('p2_jump', true);
+      }
       this.player2.flipX = false; // flip the sprite to the right
-    } else {
+    } else if (this.player2.body.onFloor()) {
       this.player2.body.setVelocityX(0);
       this.player2.anims.play('p2_idle', true);
     }
