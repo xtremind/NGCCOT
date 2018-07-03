@@ -26,10 +26,11 @@ class PreloadScene extends Phaser.Scene {
       this.scene.start('TitleScene');
     });
 
-    this.load.image('background', 'public/game/bg_castle.png');
+    this.load.image('background', 'public/tileset/bg_castle.png');
 
     // tiles in spritesheet 
-    this.load.image('tiles', 'public/tileset/tileset.png');
+    //this.load.image('tiles', 'public/tileset/tileset.png');
+    this.load.atlas('tiles', 'public/tileset/tileset.png', 'public/tileset/tileset_spritesheet.json');
     //this.load.spritesheet('tiles', 'assets/tiles.png', {frameWidth: 70, frameHeight: 70});
     this.load.tilemapTiledJSON('map', 'public/tileset/tileset.json');
 
