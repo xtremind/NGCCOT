@@ -81,84 +81,43 @@ class TitleScene extends Phaser.Scene {
     this.physics.add.collider(layer, this.player2);
     this.physics.add.collider(this.player1, this.player2);
 
-
-
-
-    //demo
-    //this.add.image(400, 300, 'sky');
-    /*
-        var particles = this.add.particles('red');
-    
-        var emitter = particles.createEmitter({
-          speed: 100,
-          scale: { start: 1, end: 0 },
-          blendMode: 'ADD'
-        });
-        var logo = this.physics.add.image(400, 100, 'logo');
-    
-        logo.setVelocity(100, 200);
-        logo.setBounce(1, 1);
-        logo.setCollideWorldBounds(true);
-    
-        emitter.startFollow(logo);*/
   }
-
 
   update() {
     // Move player
-
     var cursors = this.input.keyboard.createCursorKeys();
+    this.movePlayer(this.player1, 'p1', cursors.up, cursors.left, cursors.right, cursors.down);
+    this.movePlayer(this.player2, 'p2', this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z), this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q), this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D), this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S));
+  }
 
-    if (cursors.left.isDown) {
-      this.player1.body.setVelocityX(-200); // move left
-      if (this.player1.body.onFloor()) {
-        this.player1.anims.play('p1_walk', true); // play walk animation
-      } else {
-        this.player1.anims.play('p1_jump', true);
+  movePlayer(player, prefix, keyUp, keyLeft, keyRight, keyAction) {
+    if (keyLeft.isDown) {
+      player.body.setVelocityX(-200); // move left
+      if (player.body.onFloor()) {
+        player.anims.play(prefix + '_walk', true); // play walk animation
       }
-      this.player1.flipX = true; // flip the sprite to the left
-    } else if (cursors.right.isDown) {
-      this.player1.body.setVelocityX(200); // move right
-      if (this.player1.body.onFloor()) {
-        this.player1.anims.play('p1_walk', true); // play walk animation
-      } else {
-        this.player1.anims.play('p1_jump', true);
+      else {
+        player.anims.play(prefix + '_jump', true);
       }
-      this.player1.flipX = false; // flip the sprite to the right
-    } else if (this.player1.body.onFloor()) {
-      this.player1.body.setVelocityX(0);
-      this.player1.anims.play('p1_idle', true);
+      player.flipX = true; // flip the sprite to the left
     }
-
-    if (cursors.up.isDown && this.player1.body.onFloor()) {
-      this.player1.body.setVelocityY(-500); // jump up
-      this.player1.anims.play('p1_jump', true);
-    }
-
-    if (this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q).isDown) {
-      this.player2.body.setVelocityX(-200); // move left
-      if (this.player2.body.onFloor()) {
-        this.player2.anims.play('p2_walk', true); // play walk animation
-      } else {
-        this.player2.anims.play('p2_jump', true);
+    else if (keyRight.isDown) {
+      player.body.setVelocityX(200); // move right
+      if (player.body.onFloor()) {
+        player.anims.play(prefix + '_walk', true); // play walk animation
       }
-      this.player2.flipX = true; // flip the sprite to the left
-    } else if (this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D).isDown) {
-      this.player2.body.setVelocityX(200); // move right
-      if (this.player2.body.onFloor()) {
-        this.player2.anims.play('p2_walk', true); // play walk animation
-      } else {
-        this.player2.anims.play('p2_jump', true);
+      else {
+        player.anims.play(prefix + '_jump', true);
       }
-      this.player2.flipX = false; // flip the sprite to the right
-    } else if (this.player2.body.onFloor()) {
-      this.player2.body.setVelocityX(0);
-      this.player2.anims.play('p2_idle', true);
+      player.flipX = false; // flip the sprite to the right
     }
-
-    if (this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z).isDown && this.player2.body.onFloor()) {
-      this.player2.body.setVelocityY(-500); // jump up
-      this.player2.anims.play('p2_jump', true);
+    else if (player.body.onFloor()) {
+      player.body.setVelocityX(0);
+      player.anims.play(prefix + '_idle', true);
+    }
+    if (keyUp.isDown && player.body.onFloor()) {
+      player.body.setVelocityY(-500); // jump up
+      player.anims.play(prefix + '_jump', true);
     }
   }
 }
