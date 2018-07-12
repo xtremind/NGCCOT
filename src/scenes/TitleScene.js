@@ -14,8 +14,7 @@ class TitleScene extends Phaser.Scene {
     console.log("TitleScene");
 
     //add repeating background image
-    //var background = this.add.tileSprite(0, 0, this.game.width, this.game.height, "background");
-    var background = this.add.tileSprite(0, 0, 1050 * 2, 700 * 2, "background"); //don't know why, but it didn't repeat until the end of the canvas
+    var background = this.add.tileSprite(0, 0, this.sys.game.config.width*2, this.sys.game.config.height*2, "background"); //don't know why, but it didn't repeat until the end of the canvas if not *2
 
     //add level tileset
     var map = this.make.tilemap({ key: 'map' });
