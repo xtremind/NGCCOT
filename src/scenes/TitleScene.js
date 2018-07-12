@@ -97,6 +97,13 @@ class TitleScene extends Phaser.Scene {
       player.body.setVelocityY(-500); // jump up
       player.anims.play(prefix + '_jump', true);
     }
+    //if action
+      //if gun + bullet
+        //fire
+      //if gun
+        //launch it
+      //else
+        //punch
   }
 }
 
