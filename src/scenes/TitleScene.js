@@ -27,54 +27,9 @@ class TitleScene extends Phaser.Scene {
     this.physics.world.bounds.width = layer.width;
     this.physics.world.bounds.height = layer.height;
 
-    // create the player sprite    
-    this.player1 = this.physics.add.sprite(200, 180, 'player1');
-    this.player1.setBounce(0.2); // our player will bounce from items
-    this.player1.setCollideWorldBounds(true); // don't go out of the map
-
-
-    this.anims.create({
-      key: 'p1_idle',
-      frames: [{ key: 'player1', frame: 'p1_front.png' }],
-      frameRate: 10,
-    });
-
-    this.anims.create({
-      key: 'p1_jump',
-      frames: [{ key: 'player1', frame: 'p1_jump.png' }],
-      frameRate: 10,
-    });
-
-    this.anims.create({
-      key: 'p1_walk',
-      frames: this.anims.generateFrameNames('player1', { prefix: 'p1_walk', suffix: '.png', start: 1, end: 11, zeroPad: 2 }),
-      frameRate: 10,
-      repeat: -1
-    });
-
-    //Load the initial sprite
-    this.player2 = this.physics.add.sprite(400, 180, 'player2', 'p2_front.png');
-    this.player2.setBounce(0.2); // our player will bounce from items
-    this.player2.setCollideWorldBounds(true); // don't go out of the map
-
-    this.anims.create({
-      key: 'p2_idle',
-      frames: [{ key: 'player2', frame: 'p2_front.png' }],
-      frameRate: 10,
-    });
-
-    this.anims.create({
-      key: 'p2_jump',
-      frames: [{ key: 'player2', frame: 'p2_jump.png' }],
-      frameRate: 10,
-    });
-
-    this.anims.create({
-      key: 'p2_walk',
-      frames: this.anims.generateFrameNames('player2', { prefix: 'p2_walk', suffix: '.png', start: 1, end: 11, zeroPad: 2 }),
-      frameRate: 10,
-      repeat: -1
-    });
+    // initiate players
+    this.player1 = this.initiatePlayer('player1', 'p1', 850, 180);
+    this.player2 = this.initiatePlayer('player2', 'p2', 200, 180);
 
     // set collision
     this.physics.add.collider(layer, this.player1);
@@ -88,6 +43,30 @@ class TitleScene extends Phaser.Scene {
     var cursors = this.input.keyboard.createCursorKeys();
     this.movePlayer(this.player1, 'p1', cursors.up, cursors.left, cursors.right, cursors.down);
     this.movePlayer(this.player2, 'p2', this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z), this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q), this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D), this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S));
+  }
+
+  initiatePlayer(id, prefix, x, y) {
+    var player = this.physics.add.sprite(x, y, id, prefix +'_front.png');
+    player.setBounce(0.2); // our player will bounce from items
+    player.setCollideWorldBounds(true); // don't go out of the map
+    this.anims.create({
+      key: prefix +'_idle',
+      frames: [{ key: id, frame: prefix +'_front.png' }],
+      frameRate: 10,
+    });
+    this.anims.create({
+      key: prefix +'_jump',
+      frames: [{ key: id, frame: prefix +'_jump.png' }],
+      frameRate: 10,
+    });
+    this.anims.create({
+      key: prefix +'_walk',
+      frames: this.anims.generateFrameNames(id, { prefix: prefix +'_walk', suffix: '.png', start: 1, end: 11, zeroPad: 2 }),
+      frameRate: 10,
+      repeat: -1
+    });
+
+    return player;
   }
 
   movePlayer(player, prefix, keyUp, keyLeft, keyRight, keyAction) {
