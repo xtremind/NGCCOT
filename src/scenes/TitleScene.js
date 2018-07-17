@@ -35,6 +35,13 @@ class TitleScene extends Phaser.Scene {
     this.physics.add.collider(layer, this.player2);
     this.physics.add.collider(this.player1, this.player2);
 
+    // if collision between player and launched gun or hand
+      // player collapse for x seconds
+    // else if collision between player and fired bullet
+      // player killed
+    // else if collision between player and gun or bullet
+      // player get it
+      // item destroyed
   }
 
   update() {
