@@ -30,9 +30,15 @@ class TitleScene extends Phaser.Scene {
     this.player1 = this.initiatePlayer('player1', 'p1', 850, 180);
     this.player2 = this.initiatePlayer('player2', 'p2', 200, 180);
 
+    // initiate gun
+    this.gun = this.initiateGun();
+
     // set collision
     this.physics.add.collider(layer, this.player1);
     this.physics.add.collider(layer, this.player2);
+    this.physics.add.collider(layer, this.gun);
+    this.physics.add.collider(this.gun, this.player1);
+    this.physics.add.collider(this.gun, this.player2);
     this.physics.add.collider(this.player1, this.player2);
 
     // if collision between player and launched gun or hand
@@ -49,12 +55,19 @@ class TitleScene extends Phaser.Scene {
     var cursors = this.input.keyboard.createCursorKeys();
     this.movePlayer(this.player1, 'p1', cursors.up, cursors.left, cursors.right, cursors.down);
     this.movePlayer(this.player2, 'p2', this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z), this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q), this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D), this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S));
+    if (this.gun.body.onFloor()){
+      console.log("rotate");
+    }
+  }
+
+  initiateGun(){
+    var gun = this.physics.add.sprite(525, -200, 'gun');
+    gun.setBounce(0.2); // our player will bounce from items
+    gun.setDisplaySize(40, 40);
+    return gun;
   }
 
   initiatePlayer(id, prefix, x, y) {
-    var player = this.physics.add.sprite(x, y, id, prefix +'_front.png');
-    player.setBounce(0.2); // our player will bounce from items
-    player.setCollideWorldBounds(true); // don't go out of the map
     this.anims.create({
       key: prefix +'_idle',
       frames: [{ key: id, frame: prefix +'_front.png' }],
@@ -71,6 +84,10 @@ class TitleScene extends Phaser.Scene {
       frameRate: 10,
       repeat: -1
     });
+
+    var player = this.physics.add.sprite(x, y, id).play(prefix+'_idle');
+    player.setBounce(0.2); // our player will bounce from items
+    player.setCollideWorldBounds(true); // don't go out of the map
 
     return player;
   }
