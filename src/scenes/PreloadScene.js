@@ -28,22 +28,16 @@ class PreloadScene extends Phaser.Scene {
 
     this.load.image('background', 'public/tileset/bg_castle.png');
 
-    // tiles in spritesheet 
-    //this.load.image('tiles', 'public/tileset/tileset.png');
     this.load.atlas('tiles', 'public/tileset/tileset.png', 'public/tileset/tileset_spritesheet.json');
-    //this.load.spritesheet('tiles', 'assets/tiles.png', {frameWidth: 70, frameHeight: 70});
     this.load.tilemapTiledJSON('map', 'public/tileset/tileset.json');
 
     this.load.atlas('player1', 'public/game/player/player1.png', 'public/game/player/player1.json');
     this.load.atlas('player2', 'public/game/player/player2.png', 'public/game/player/player2.json');
     this.load.atlas('player3', 'public/game/player/player3.png', 'public/game/player/player3.json');
 
-    // demo
-    //this.load.setBaseURL(' http://labs.phaser.io');
-    /*
-    this.load.image('sky', 'http://labs.phaser.io/assets/skies/space3.png');
-    this.load.image('logo', 'http://labs.phaser.io/assets/sprites/phaser3-logo.png');
-    this.load.image('red', 'http://labs.phaser.io/assets/particles/red.png');*/
+    this.load.image('gun', 'public/game/gun/laser_gun.png');
+    this.load.image('energy', 'public/game/gun/energy.png');
+
   }
 
 }
