@@ -36,10 +36,11 @@ class PreloadScene extends Phaser.Scene {
     this.load.atlas('player3', 'public/game/player/player3.png', 'public/game/player/player3.json');
 
     this.load.image('gun', 'public/game/gun/laser_gun.png');
+    this.load.image('bullet', 'public/game/gun/bullet.png');
     this.load.image('energy', 'public/game/gun/energy.png');
+    this.load.image('flares', 'public/game/gun/particle.png');
 
   }
-
 }
 
 export default PreloadScene;
