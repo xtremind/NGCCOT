@@ -33,10 +33,14 @@ class TitleScene extends Phaser.Scene {
     // initiate gun
     this.gun = this.initiateGun();
 
+    // initiate energy
+    this.energy = this.initiateEnergy();
+
     // set collision
     this.physics.add.collider(layer, this.player1);
     this.physics.add.collider(layer, this.player2);
     this.physics.add.collider(layer, this.gun);
+    this.physics.add.collider(layer, this.energy);
     this.physics.add.collider(this.gun, this.player1, this.takeGun);
     this.physics.add.collider(this.gun, this.player2, this.takeGun);
     this.physics.add.collider(this.player1, this.player2);
@@ -82,6 +86,7 @@ class TitleScene extends Phaser.Scene {
 
     // if collision between player and launched gun or hand
     // player collapse for x seconds
+    // player drop gun or energy
     // else if collision between player and fired bullet
     // player killed
     // else if collision between player and gun or bullet
@@ -105,6 +110,10 @@ class TitleScene extends Phaser.Scene {
       console.log("rotate");
     }*/
 
+    if(!this.gun.hasBullet && this.energy.active == false){
+      this.dropEnergy();
+    }
+
     //  Emitters to bullets
     this.bullets.children.each(function (b) {
       if (b.active) {
@@ -113,6 +122,22 @@ class TitleScene extends Phaser.Scene {
         this.flares.emitParticle(1);
       }
     }, this);
+  }
+
+
+  initiateEnergy() {
+    var energy = this.physics.add.sprite(525, -200, 'energy');
+    energy.setDisplaySize(20, 20);
+    energy.setBounce(0.2); // our player will bounce from items
+    energy.setActive(false);
+    energy.setVisible(false);
+    return energy;
+  }
+
+  dropEnergy(){
+    this.energy.setPosition(525, -200);
+    this.energy.setActive(true);
+    this.energy.setVisible(true);
   }
 
   initiateGun() {
