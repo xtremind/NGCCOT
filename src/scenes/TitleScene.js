@@ -44,9 +44,7 @@ class TitleScene extends Phaser.Scene {
 
     //  Bullets
     var Bullet = new Phaser.Class({
-
       Extends: Phaser.GameObjects.Image,
-
       initialize: function Bullet(scene) {
         Phaser.GameObjects.Image.call(this, scene, 0, 0, 'bullet');
         this.speed = 0;
@@ -54,14 +52,17 @@ class TitleScene extends Phaser.Scene {
       },
 
       fire: function (player) {
-        this.setPosition(player.x, player.y);
+        var x = player.x, 
+          y = player.y + 10;
 
         if (player.flipX) { //  Facing left
           this.speed = Phaser.Math.GetSpeed(-1000 + player.body.velocity.x, 1);
+          x -= 50;
         } else { //  Facing right
           this.speed = Phaser.Math.GetSpeed(1000 + player.body.velocity.x, 1);
+          x += 50;
         }
-
+        this.setPosition(x, y);
         this.born = 0;
       },
 
