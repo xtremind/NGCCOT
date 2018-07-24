@@ -37,8 +37,8 @@ class TitleScene extends Phaser.Scene {
     this.physics.add.collider(layer, this.player1);
     this.physics.add.collider(layer, this.player2);
     this.physics.add.collider(layer, this.gun);
-    this.physics.add.collider(this.gun, this.player1);
-    this.physics.add.collider(this.gun, this.player2);
+    this.physics.add.collider(this.gun, this.player1, this.takeGun);
+    this.physics.add.collider(this.gun, this.player2, this.takeGun);
     this.physics.add.collider(this.player1, this.player2);
 
 
@@ -52,7 +52,7 @@ class TitleScene extends Phaser.Scene {
       },
 
       fire: function (player) {
-        var x = player.x, 
+        var x = player.x,
           y = player.y + 10;
 
         if (player.flipX) { //  Facing left
@@ -91,6 +91,11 @@ class TitleScene extends Phaser.Scene {
 
   }
 
+  takeGun(gun, player) {
+    gun.disableBody(true, true);
+    player.hasGun = true;
+  }
+
   update() {
     // Move player
     var cursors = this.input.keyboard.createCursorKeys();
@@ -114,6 +119,7 @@ class TitleScene extends Phaser.Scene {
     var gun = this.physics.add.sprite(525, -200, 'gun');
     gun.setBounce(0.2); // our player will bounce from items
     gun.setDisplaySize(40, 40);
+    gun.hasBullet = true;
     return gun;
   }
 
@@ -138,6 +144,7 @@ class TitleScene extends Phaser.Scene {
     var player = this.physics.add.sprite(x, y, id).play(prefix + '_idle');
     player.setBounce(0.2); // our player will bounce from items
     player.setCollideWorldBounds(true); // don't go out of the map
+    player.hasGun = false;
 
     return player;
   }
@@ -172,11 +179,11 @@ class TitleScene extends Phaser.Scene {
       player.anims.play(prefix + '_jump', true);
     }
     if (keyAction.isDown) {
-      var bullet = this.bullets.get();
-      bullet.setActive(true);
-      bullet.setVisible(true);
-
-      if (bullet) {
+      if (player.hasGun && this.gun.hasBullet) {
+        this.gun.hasBullet = false;
+        var bullet = this.bullets.get();
+        bullet.setActive(true);
+        bullet.setVisible(true);
         bullet.fire(player);
       }
     }
