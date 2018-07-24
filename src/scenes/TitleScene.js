@@ -81,24 +81,45 @@ class TitleScene extends Phaser.Scene {
       }
     });
 
-    this.bullets = this.add.group({ classType: Bullet, runChildUpdate: true });
+    this.bullets = this.physics.add.group({ classType: Bullet, runChildUpdate: true });
     this.createBulletEmitter();
 
+
     // if collision between player and launched gun or hand
-    // player collapse for x seconds
-    // player drop gun or energy
+      // player collapse for x seconds
+      // player drop gun or energy
     // else if collision between player and fired bullet
-    // player killed
-    // else if collision between player and gun or bullet
-    // player get it
-    // item destroyed
+      // player killed
+      this.physics.add.overlap(this.player1, this.bullets.children, this.killPlayer, null, this);
+      this.physics.add.overlap(this.player2, this.bullets.children, this.killPlayer, null, this);
+    // else if collision between player and gun or energy
+      // player get it
+      // item destroyed
+  }
 
+  killPlayer(bullets, player) {
+    this.sys.pause();
+    //this.scene.start('TitleScene');
+  }
 
+  takeEnergy(energy, player) {
+    energy.disableBody(true, true);
+    energy.setActive(false);
+    energy.setVisible(false);
+    if (player.gun != null) {
+      player.gun.hasEnergy = true;
+    } else {
+      player.hasEnergy = true;
+    }
   }
 
   takeGun(gun, player) {
     gun.disableBody(true, true);
-    player.hasGun = true;
+    if (player.hasEnergy) {
+      gun.hasEnergy = true;
+      player.hasEnergy = false;
+    }
+    player.gun = gun;
   }
 
   update() {
@@ -110,7 +131,7 @@ class TitleScene extends Phaser.Scene {
       console.log("rotate");
     }*/
 
-    if(!this.gun.hasBullet && this.energy.active == false){
+    if (!this.gun.hasEnergy && this.energy.active == false) {
       this.dropEnergy();
     }
 
@@ -134,7 +155,7 @@ class TitleScene extends Phaser.Scene {
     return energy;
   }
 
-  dropEnergy(){
+  dropEnergy() {
     this.energy.setPosition(525, -200);
     this.energy.setActive(true);
     this.energy.setVisible(true);
@@ -177,25 +198,21 @@ class TitleScene extends Phaser.Scene {
   movePlayer(player, prefix, keyUp, keyLeft, keyRight, keyAction) {
     if (keyLeft.isDown) {
       player.body.setVelocityX(-200); // move left
-      if (player.body.onFloor()) {
-        player.anims.play(prefix + '_walk', true); // play walk animation
-      }
-      else {
-        player.anims.play(prefix + '_jump', true);
-      }
       player.flipX = true; // flip the sprite to the left
-    }
-    else if (keyRight.isDown) {
-      player.body.setVelocityX(200); // move right
       if (player.body.onFloor()) {
         player.anims.play(prefix + '_walk', true); // play walk animation
-      }
-      else {
+      } else {
         player.anims.play(prefix + '_jump', true);
       }
+    } else if (keyRight.isDown) {
+      player.body.setVelocityX(200); // move right
       player.flipX = false; // flip the sprite to the right
-    }
-    else if (player.body.onFloor()) {
+      if (player.body.onFloor()) {
+        player.anims.play(prefix + '_walk', true); // play walk animation
+      } else {
+        player.anims.play(prefix + '_jump', true);
+      }
+    } else if (player.body.onFloor()) {
       player.body.setVelocityX(0);
       player.anims.play(prefix + '_idle', true);
     }
@@ -203,22 +220,22 @@ class TitleScene extends Phaser.Scene {
       player.body.setVelocityY(-500); // jump up
       player.anims.play(prefix + '_jump', true);
     }
+    //if action
     if (keyAction.isDown) {
-      if (player.hasGun && this.gun.hasBullet) {
-        this.gun.hasBullet = false;
+      //if gun + bullet
+      if (player.gun != null && player.gun.hasEnergy) {
+        //fire
+        this.gun.hasEnergy = false;
         var bullet = this.bullets.get();
         bullet.setActive(true);
         bullet.setVisible(true);
         bullet.fire(player);
       }
+      //else if gun
+        //launch it
+      //else
+        //punch
     }
-    //if action
-    //if gun + bullet
-    //fire
-    //if gun
-    //launch it
-    //else
-    //punch
   }
 
   createBulletEmitter() {
