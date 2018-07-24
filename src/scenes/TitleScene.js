@@ -43,6 +43,8 @@ class TitleScene extends Phaser.Scene {
     this.physics.add.collider(layer, this.energy);
     this.physics.add.collider(this.gun, this.player1, this.takeGun);
     this.physics.add.collider(this.gun, this.player2, this.takeGun);
+    this.physics.add.collider(this.energy, this.player1, this.takeEnergy);
+    this.physics.add.collider(this.energy, this.player2, this.takeEnergy);
     this.physics.add.collider(this.player1, this.player2);
 
 
@@ -145,9 +147,8 @@ class TitleScene extends Phaser.Scene {
     }, this);
   }
 
-
   initiateEnergy() {
-    var energy = this.physics.add.sprite(525, -200, 'energy');
+    var energy = this.physics.add.sprite(0, 0, 'energy');
     energy.setDisplaySize(20, 20);
     energy.setBounce(0.2); // our player will bounce from items
     energy.setActive(false);
@@ -165,7 +166,7 @@ class TitleScene extends Phaser.Scene {
     var gun = this.physics.add.sprite(525, -200, 'gun');
     gun.setBounce(0.2); // our player will bounce from items
     gun.setDisplaySize(40, 40);
-    gun.hasBullet = true;
+    gun.hasEnergy = true;
     return gun;
   }
 
@@ -190,7 +191,7 @@ class TitleScene extends Phaser.Scene {
     var player = this.physics.add.sprite(x, y, id).play(prefix + '_idle');
     player.setBounce(0.2); // our player will bounce from items
     player.setCollideWorldBounds(true); // don't go out of the map
-    player.hasGun = false;
+    player.gun = null;
 
     return player;
   }
