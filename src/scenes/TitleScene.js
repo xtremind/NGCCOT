@@ -12,6 +12,7 @@ class TitleScene extends Phaser.Scene {
 
   create() {
     console.log("TitleScene");
+    var scope = this;
 
     //add repeating background image
     var background = this.add.tileSprite(0, 0, this.sys.game.config.width * 2, this.sys.game.config.height * 2, "background"); //don't know why, but it didn't repeat until the end of the canvas if not *2
@@ -41,11 +42,21 @@ class TitleScene extends Phaser.Scene {
     this.physics.add.collider(layer, this.player2);
     this.physics.add.collider(layer, this.gun);
     this.physics.add.collider(layer, this.energy);
-    this.physics.add.collider(this.gun, this.player1, this.takeGun);
-    this.physics.add.collider(this.gun, this.player2, this.takeGun);
-    this.physics.add.collider(this.energy, this.player1, this.takeEnergy);
-    this.physics.add.collider(this.energy, this.player2, this.takeEnergy);
     this.physics.add.collider(this.player1, this.player2);
+    this.physics.add.overlap(this.gun, this.player1, this.takeGun);
+    this.physics.add.overlap(this.gun, this.player2, this.takeGun);
+    this.physics.add.overlap(this.energy, this.player1, function(energy, player) {
+      energy.disableBody(true, true);
+      energy.setActive(false);
+      energy.setVisible(false);
+      if (player.gun != null) {
+        player.gun.hasEnergy = true;
+      } else {
+        player.hasEnergy = true;
+      }
+      scope.gun.hasEnergy = true;
+    });
+    this.physics.add.overlap(this.energy, this.player2, this.takeEnergy);
 
 
     //  Bullets
@@ -69,6 +80,7 @@ class TitleScene extends Phaser.Scene {
           x += 50;
         }
         this.setPosition(x, y);
+        this.body.setAllowGravity(false)
         this.born = 0;
       },
 
@@ -92,8 +104,9 @@ class TitleScene extends Phaser.Scene {
       // player drop gun or energy
     // else if collision between player and fired bullet
       // player killed
-      this.physics.add.overlap(this.player1, this.bullets.children, this.killPlayer, null, this);
-      this.physics.add.overlap(this.player2, this.bullets.children, this.killPlayer, null, this);
+        // => see update function
+        //this.physics.add.overlap(this.player1, this.bullets.children, this.killPlayer, null, this); 
+        //this.physics.add.overlap(this.player2, this.bullets.children, this.killPlayer, null, this);
     // else if collision between player and gun or energy
       // player get it
       // item destroyed
@@ -104,15 +117,14 @@ class TitleScene extends Phaser.Scene {
     //this.scene.start('TitleScene');
   }
 
-  takeEnergy(energy, player) {
+  takeEnergy(player, gun, energy) {
     energy.disableBody(true, true);
-    energy.setActive(false);
-    energy.setVisible(false);
     if (player.gun != null) {
       player.gun.hasEnergy = true;
     } else {
       player.hasEnergy = true;
     }
+    gun.hasEnergy = true;
   }
 
   takeGun(gun, player) {
@@ -133,6 +145,8 @@ class TitleScene extends Phaser.Scene {
       console.log("rotate");
     }*/
 
+    //console.log(this.gun.hasEnergy);
+    //console.log(this.energy.active);
     if (!this.gun.hasEnergy && this.energy.active == false) {
       this.dropEnergy();
     }
@@ -151,15 +165,13 @@ class TitleScene extends Phaser.Scene {
     var energy = this.physics.add.sprite(0, 0, 'energy');
     energy.setDisplaySize(20, 20);
     energy.setBounce(0.2); // our player will bounce from items
-    energy.setActive(false);
-    energy.setVisible(false);
+    energy.disableBody(true, true);
+    energy.name = 'energy';
     return energy;
   }
 
   dropEnergy() {
-    this.energy.setPosition(525, -200);
-    this.energy.setActive(true);
-    this.energy.setVisible(true);
+    this.energy.enableBody(true, 525, -200, true, true);
   }
 
   initiateGun() {
@@ -167,6 +179,7 @@ class TitleScene extends Phaser.Scene {
     gun.setBounce(0.2); // our player will bounce from items
     gun.setDisplaySize(40, 40);
     gun.hasEnergy = true;
+    gun.name = 'gun';
     return gun;
   }
 
@@ -192,6 +205,7 @@ class TitleScene extends Phaser.Scene {
     player.setBounce(0.2); // our player will bounce from items
     player.setCollideWorldBounds(true); // don't go out of the map
     player.gun = null;
+    player.name = id;
 
     return player;
   }
@@ -231,6 +245,8 @@ class TitleScene extends Phaser.Scene {
         bullet.setActive(true);
         bullet.setVisible(true);
         bullet.fire(player);
+        this.physics.add.overlap(this.player1, bullet, this.killPlayer, null, this);
+        this.physics.add.overlap(this.player2, bullet, this.killPlayer, null, this);
       }
       //else if gun
         //launch it
