@@ -46,18 +46,11 @@ class TitleScene extends Phaser.Scene {
     this.physics.add.overlap(this.gun, this.player1, this.takeGun);
     this.physics.add.overlap(this.gun, this.player2, this.takeGun);
     this.physics.add.overlap(this.energy, this.player1, function(energy, player) {
-      energy.disableBody(true, true);
-      energy.setActive(false);
-      energy.setVisible(false);
-      if (player.gun != null) {
-        player.gun.hasEnergy = true;
-      } else {
-        player.hasEnergy = true;
-      }
-      scope.gun.hasEnergy = true;
+      scope.takeEnergy(player, scope.gun, energy);
     });
-    this.physics.add.overlap(this.energy, this.player2, this.takeEnergy);
-
+    this.physics.add.overlap(this.energy, this.player2, function(energy, player) {
+      scope.takeEnergy(player, scope.gun, energy);
+    });
 
     //  Bullets
     var Bullet = new Phaser.Class({
