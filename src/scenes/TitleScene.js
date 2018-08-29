@@ -85,8 +85,7 @@ class TitleScene extends Phaser.Scene {
         this.born += delta;
 
         if (this.born > 1000) {
-          this.setActive(false);
-          this.setVisible(false);
+          this.disableBody(true, true);
         }
       }
     });

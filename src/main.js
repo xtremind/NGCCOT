@@ -6,6 +6,11 @@ import BootScene from './scenes/BootScene';
 import PreloadScene from './scenes/PreloadScene';
 import TitleScene from './scenes/TitleScene';
 
+// Configuration
+var gameConfiguration = require("./properties/gameConfiguration.json");
+
+console.log("main")
+
 // Declare configuration
 const config = {
   type: Phaser.AUTO,
@@ -27,3 +32,4 @@ const config = {
 
 // 
 var game = new Phaser.Game(config);
+game.properties = gameConfiguration;
