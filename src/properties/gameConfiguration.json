@@ -1,13 +1,13 @@
 {
     "player": {
         "speed": 200,
-        "jump": -500,
+        "jump": -700,
         "bounce": 0.2
     },
     "bullet": {
         "speed": 1000
     },
     "common": {
-        "gravity": 400
+        "gravity": 800
     }
 }

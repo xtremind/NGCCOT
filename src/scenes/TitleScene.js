@@ -85,7 +85,8 @@ class TitleScene extends Phaser.Scene {
         this.born += delta;
 
         if (this.born > 1000) {
-          this.disableBody(true, true);
+          this.setActive(false);
+          this.setVisible(false);
         }
       }
     });
@@ -126,10 +127,10 @@ class TitleScene extends Phaser.Scene {
     energy.disableBody(true, true);
     if (player.gun != null) {
       player.gun.hasEnergy = true;
+      gun.hasEnergy = true;
     } else {
       player.hasEnergy = true;
     }
-    gun.hasEnergy = true;
   }
 
   takeGun(gun, player) {
@@ -217,7 +218,7 @@ class TitleScene extends Phaser.Scene {
 
   movePlayer(player, prefix, keyUp, keyLeft, keyRight, keyAction) {
     if (keyLeft.isDown) {
-      player.body.setVelocityX(-200); // move left
+      player.body.setVelocityX(-this.sys.game.properties.player.speed); // move left
       player.flipX = true; // flip the sprite to the left
       if (player.body.onFloor()) {
         player.anims.play(prefix + '_walk', true); // play walk animation
@@ -225,7 +226,7 @@ class TitleScene extends Phaser.Scene {
         player.anims.play(prefix + '_jump', true);
       }
     } else if (keyRight.isDown) {
-      player.body.setVelocityX(200); // move right
+      player.body.setVelocityX(this.sys.game.properties.player.speed); // move right
       player.flipX = false; // flip the sprite to the right
       if (player.body.onFloor()) {
         player.anims.play(prefix + '_walk', true); // play walk animation
@@ -237,7 +238,7 @@ class TitleScene extends Phaser.Scene {
       player.anims.play(prefix + '_idle', true);
     }
     if (keyUp.isDown && player.body.onFloor()) {
-      player.body.setVelocityY(-500); // jump up
+      player.body.setVelocityY(this.sys.game.properties.player.jump); // jump up
       player.anims.play(prefix + '_jump', true);
     }
     //if action

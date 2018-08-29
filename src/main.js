@@ -16,10 +16,11 @@ const config = {
   type: Phaser.AUTO,
   width: 1050,
   height: 700,
+  pixelArt: true,
   physics: {
     default: 'arcade',
     arcade: {
-      gravity: { y: 400 },
+      gravity: { y: gameConfiguration.common.gravity },
       debug: true
     }
   },
