@@ -14,6 +14,9 @@ class TitleScene extends Phaser.Scene {
     console.log("TitleScene");
     var scope = this;
 
+    // reset camera effects
+    this.cameras.main.resetFX();
+
     //add repeating background image
     var background = this.add.tileSprite(0, 0, this.sys.game.config.width * 2, this.sys.game.config.height * 2, "background"); //don't know why, but it didn't repeat until the end of the canvas if not *2
 
@@ -106,8 +109,18 @@ class TitleScene extends Phaser.Scene {
   }
 
   killPlayer(bullets, player) {
-    this.sys.pause();
-    //this.scene.start('TitleScene');
+     // shake the camera
+    this.cameras.main.shake(500);
+ 
+    // fade camera
+    this.time.delayedCall(250, function() {
+      this.cameras.main.fade(250);
+    }, [], this);
+ 
+    // restart game
+    this.time.delayedCall(500, function() {
+      this.scene.restart();
+    }, [], this);
   }
 
   takeEnergy(player, gun, energy) {
